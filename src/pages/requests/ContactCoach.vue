@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div>
+    <div class="form-control">
       <label for="email">Your E-Mail</label>
       <input type="email" id="email" v-model.trim="email">
     </div>
-    <div>
+    <div class="form-control">
       <label for="message">Message</label>
       <textarea id="message" rows="5" v-model.trim="message"></textarea>
     </div>
@@ -32,7 +32,12 @@ export default {
         return
       }
 
-      
+      this.$store.dispatch('requests/contactCoach', {
+        email: this.email,
+        message: this.message,
+        coachId: this.$route.params.id
+      })
+      this.$router.replace('/coaches')
     }
   }
 }
